@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head><title>Import CSV</title></head>
+<body>
+    <h1>Import CSV Data</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="csv_file">Select CSV File:</label>
+        <input type="file" name="csv_file" required><br><br>
+        
+        <label for="mode">Import Mode:</label>
+        <select name="mode" id="mode">
+            <option value="insert">Insert New Only</option>
+            <option value="overwrite">Overwrite Existing</option>
+            <option value="merge">Merge (Update Existing, Add New)</option>
+            <option value="retain">Retain Existing (Add New Only)</option>
+            <option value="revert">Revert to Last Backup</option>
+        </select><br><br>
+        
+        <input type="submit" value="Import CSV">
+    </form>
+    <a href="{{ url_for('admin.admin_dashboard') }}">Back to Admin Dashboard</a>
+</body>
+</html>

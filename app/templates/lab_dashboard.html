@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Lab: {{ lab.name }}</h2>
+<a href="{{ url_for('lab.import_csv_for_lab', lab_name=lab.name) }}" class="btn btn-secondary mb-3">Import Data</a>
+<a href="{{ url_for('lab.export_csv_for_lab', lab_name=lab.name) }}" class="btn btn-secondary mb-3">Export Data</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Identifier</th>
+            <th>Owner</th>
+            <th>Justification</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for comp in computers %}
+        <tr class="table-row-{{ comp.status }}"> {# Dynamic class for styling #}
+            <td>
+                {% if comp.computer_name %}CN:{{ comp.computer_name }}
+                {% elif comp.serial_number %}SN:{{ comp.serial_number }}
+                {% elif comp.mac_address %}MAC:{{ comp.mac_address }}
+                {% else %}UNKNOWN{% endif %}
+            </td>
+            <td>{{ comp.owner }}</td>
+            <td>{{ comp.justification }}</td>
+            <td>
+                <span class="badge rounded-pill badge-{{ comp.status }}">
+                    {{ comp.status.replace('_', ' ').title() }}
+                </span>
+            </td>
+            <td>
+                <a href="{{ url_for('lab.edit_computer', computer_id=comp.id) }}" class="btn btn-sm btn-primary">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

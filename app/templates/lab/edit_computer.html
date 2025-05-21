@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Edit Computer: {{ computer.computer_name or computer.serial_number or computer.mac_address }}</h2>
+<form method="POST">
+    <div class="mb-3">
+        <label for="owner" class="form-label">Owner</label>
+        <input type="text" class="form-control" id="owner" name="owner" value="{{ computer.owner }}">
+    </div>
+    <div class="mb-3">
+        <label for="justification" class="form-label">Justification</label>
+        <textarea class="form-control" id="justification" name="justification">{{ computer.justification }}</textarea>
+    </div>
+    <div class="mb-3">
+        <label for="status" class="form-label">Status</label>
+        <select class="form-select" id="status" name="status">
+            <option value="pending" {% if computer.status == 'pending' %}selected{% endif %}>Pending</option>
+            <option value="submitted" {% if computer.status == 'submitted' %}selected{% endif %}>Submitted</option>
+            <option value="needs_info" {% if computer.status == 'needs_info' %}selected{% endif %}>Needs Info</option>
+            <option value="retire" {% if computer.status == 'retire' %}selected{% endif %}>Retire</option>
+            <option value="complete" {% if computer.status == 'complete' %}selected{% endif %}>Complete</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Computer</button>
+</form>
+{% endblock %}

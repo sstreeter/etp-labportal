@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head><title>Resolve Conflicts</title></head>
+<body>
+    <h1>Resolve Conflicts</h1>
+    {% if conflicts %}
+        <form method="POST">
+            {% for conflict in conflicts %}
+                <div>
+                    <h3>Conflict in Lab: {{ conflict.lab }} - Identifier: {{ conflict.identifier }}</h3>
+                    <p>New data: Owner: {{ conflict.new.owner }}, Justification: {{ conflict.new.justification }}, Status: {{ conflict.new.status }}</p>
+                    <p>Existing data: Owner: {{ conflict.existing.owner }}, Justification: {{ conflict.existing.justification }}, Status: {{ conflict.existing.status }}</p>
+                    <input type="radio" name="resolve_{{ conflict.lab }}_{{ conflict.identifier }}" value="use_new" checked> Use New
+                    <input type="radio" name="resolve_{{ conflict.lab }}_{{ conflict.identifier }}" value="retain"> Retain Existing
+                </div>
+                <hr>
+            {% endfor %}
+            <button type="submit">Resolve Selected Conflicts</button>
+        </form>
+    {% else %}
+        <p>No conflicts to resolve.</p>
+    {% endif %}
+    <a href="{{ url_for('admin.admin_dashboard') }}">Back to Admin Dashboard</a>
+</body>
+</html>

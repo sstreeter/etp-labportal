@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>All ETP Requests Overview</h2>
+
+{% for lab, computers in labs_with_etps.items() %}
+    <h3>Lab: {{ lab.name }}</h3>
+    {% if computers %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Identifier</th>
+                    <th>Owner</th>
+                    <th>Justification</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for comp in computers %}
+                <tr class="table-row-{{ comp.status }}"> {# Dynamic class for styling #}
+                    <td>{{ loop.index }}</td>
+                    <td>
+                        {% if comp.computer_name %}CN:{{ comp.computer_name }}
+                        {% elif comp.serial_number %}SN:{{ comp.serial_number }}
+                        {% elif comp.mac_address %}MAC:{{ comp.mac_address }}
+                        {# Add display for other new identifiers if needed #}
+                        {% else %}UNKNOWN{% endif %}
+                    </td>
+                    <td>{{ comp.owner }}</td>
+                    <td>{{ comp.justification }}</td>
+                    <td>
+                        <span class="badge rounded-pill badge-{{ comp.status }}">
+                            {{ comp.status.replace('_', ' ').title() }}
+                        </span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No ETP requests for this lab.</p>
+    {% endif %}
+{% endfor %}
+{% endblock %}

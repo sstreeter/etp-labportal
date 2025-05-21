@@ -1,0 +1,24 @@
+.badge-pending {
+  background-color: #FFD700; /* Yellow (Gold) */
+  color: black;
+}
+
+.badge-needs_info {
+  background-color: #DC143C; /* Crimson Red */
+  color: white;
+}
+
+.badge-submitted {
+  background-color: #1E90FF; /* Dodger Blue */
+  color: white;
+}
+
+.badge-complete {
+  background-color: #32CD32; /* Lime Green */
+  color: white;
+}
+
+.badge-retire {s
+  background-color: #8B4513;  /* SaddleBrown */
+  color: white;
+}

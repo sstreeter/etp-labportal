@@ -1,0 +1,29 @@
+# Core Flask and extensions
+Flask==3.1.1
+Flask-Login==0.6.3
+Flask-Migrate==4.1.0
+Flask-SQLAlchemy==3.1.1
+Flask-WTF==1.2.2
+
+# ORM and Migrations
+SQLAlchemy==2.0.41
+alembic==1.15.2
+greenlet==3.2.2
+Mako==1.3.10
+
+# Flask internal dependencies
+click==8.1.8
+itsdangerous==2.2.0
+Jinja2==3.1.6
+MarkupSafe==3.0.2
+Werkzeug==3.1.3
+blinker==1.9.0
+
+# Compatibility / utility
+typing_extensions==4.13.2
+importlib_metadata==8.7.0
+zipp==3.21.0
+python-dotenv==1.0.1
+
+# For forms - Pinned to a known stable version for CheckboxSelectMultiple
+WTForms==3.0.0

@@ -1,0 +1,17 @@
+# version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000" # Changed host port from 5000 to 8000
+    volumes:
+      - .:/app  # Mount the current directory to /app in the container for live updates
+      - /tmp/backups:/tmp/backups # Persist backups outside the container
+    environment:
+      FLASK_ENV: development
+      SECRET_KEY: supersecretkey # Change this to a strong, random key in production
+      # Use a SQLite database for simplicity in development; for production, consider PostgreSQL or MySQL
+      DATABASE_URL: sqlite:////app/etp.db
+    # Override the default command to initialize the DB and then run Flask
+    command: /bin/bash -c "python setup_db.py && flask run --host=0.0.0.0"

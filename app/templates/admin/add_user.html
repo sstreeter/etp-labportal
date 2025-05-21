@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Add New User</h2>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        {{ form.username.label(class="form-label") }}
+        {{ form.username(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        {{ form.password.label(class="form-label") }}
+        {{ form.password(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        {{ form.confirm_password.label(class="form-label") }}
+        {{ form.confirm_password(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        {{ form.role.label(class="form-label") }}
+        {{ form.role(class="form-select") }}
+    </div>
+    <div class="mb-3">
+        {{ form.user_type.label(class="form-label") }}
+        {{ form.user_type(class="form-select") }}
+    </div>
+    <div class="mb-3">
+        {{ form.labs.label(class="form-label") }}
+        {{ form.labs(class="form-select", multiple=true) }}
+    </div>
+    <button type="submit" class="btn btn-primary">Add User</button>
+</form>
+{% endblock %}
