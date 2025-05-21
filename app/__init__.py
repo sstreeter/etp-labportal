@@ -24,8 +24,17 @@ def create_app():
         from config import DevelopmentConfig
         app.config.from_object(DevelopmentConfig)
 
+        from app.extensions import login_manager # Import login_manager
+        login_manager.init_app(app) # Initialize Flask-Login
+        login_manager.login_view = 'auth.login' # Tell Flask-Login where your login route is
+
     db.init_app(app)
     migrate.init_app(app, db)
+# ADD THESE LINES FOR FLASK-LOGIN AND CORRECT BLUEPRINT REGISTRATION
+    from app.extensions import login_manager 
+    login_manager.init_app(app)
+    login_manager.login_view = 'auth.login' # Ensure this points to your login route
+
 
     from .admin_routes import admin
     from .lab_routes import lab
@@ -35,6 +44,6 @@ def create_app():
     app.register_blueprint(admin)
     app.register_blueprint(lab)
     app.register_blueprint(main)
-    app.register_blueprint(auth)
-
+    #app.register_blueprint(auth)
+    app.register_blueprint(auth, url_prefix='/auth') # IMPORTANT: Add url_prefix here
     return app

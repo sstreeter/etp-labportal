@@ -1,4 +1,4 @@
-# version: '3.8'
+# version: '3.8' # Uncomment this if it's commented out in your file
 
 services:
   web:
@@ -10,8 +10,9 @@ services:
       - /tmp/backups:/tmp/backups # Persist backups outside the container
     environment:
       FLASK_ENV: development
+      FLASK_APP: app # ADD THIS CRUCIAL LINE
       SECRET_KEY: supersecretkey # Change this to a strong, random key in production
       # Use a SQLite database for simplicity in development; for production, consider PostgreSQL or MySQL
       DATABASE_URL: sqlite:////app/etp.db
     # Override the default command to initialize the DB and then run Flask
-    command: /bin/bash -c "python setup_db.py && flask run --host=0.0.0.0"
+    command: /bin/bash -c "python setup_db.py && flask run --host=0.0.0.0 --port=8000" # ENSURE --port=8000 IS HERE
